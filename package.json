@@ -1,0 +1,31 @@
+{
+  "name": "game2048",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js Game2048",
+    "start:dev": "ts-node src/index.ts Game2048",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "author": "halo@khairulanshar.com",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "chalk": "^4.1.2",
+    "commander": "^14.0.0",
+    "dotenv": "^16.6.1",
+    "fs-extra": "^11.3.1",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.3.0",
+    "@types/ora": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
