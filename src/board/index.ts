@@ -1,12 +1,10 @@
 import logger from '../utils/logger';
-import { formatCell } from '../utils/string';
+import { formatCell, formatCell2 } from '../utils/string';
 import { selectRandom } from '../utils/array';
 import CustomSet from '../utils/CustomSet';
 import { AIHelper } from '../ai-helpers';
 import chalk from 'chalk';
 import { BoardRow, CellValue, GameBoard, GameMove } from './interface';
-
-
 
 export class Board {
     private board: GameBoard;
@@ -105,12 +103,12 @@ export class Board {
     private convertBoardToString(board: GameBoard): string {
         let gameboardAsString = "";
         board.forEach((row: BoardRow, index: number) => {
-            gameboardAsString += `Row ${index}: [${row.map(cell => formatCell(cell)).join(', ')}];\n`;
+            gameboardAsString += `Row ${index}: [${row.map(cell => formatCell2(cell)).join(', ')}];\n`;
         });
         return gameboardAsString;
     }
     public collectMoveHistory(move: GameMove): GameMove[] {
-        this.moveHistory.push({ ...move, score: this.score, gameBoard: this.board });
+        this.moveHistory.push({ ...move, score: this.score, gameBoard: JSON.parse(JSON.stringify(this.board)) });
         logger.debug(chalk.yellow(`Moving ${move.direction}...`), this.getMoveHistory());
         return this.moveHistory;
     }
@@ -169,7 +167,6 @@ export class Board {
             }
         }
         this.insertRandomNumber();
-        this.display();
     }
     public mergeDown(): void {
         // Implementation for merging cells downwards
@@ -196,7 +193,6 @@ export class Board {
             }
         }
         this.insertRandomNumber();
-        this.display();
     }
     public mergeLeft(): void {
         // Implementation for merging cells to the left
@@ -223,7 +219,6 @@ export class Board {
             }
         }
         this.insertRandomNumber();
-        this.display();
     }
     public mergeRight(): void {
         // Implementation for merging cells to the right
@@ -250,7 +245,6 @@ export class Board {
             }
         }
         this.insertRandomNumber();
-        this.display();
     }
     public async suggestAIMove(): Promise<void> {
         const boardState = `Current board state:\n${this.convertBoardToString(this.board)}`;

@@ -1,15 +1,8 @@
 import chalk from 'chalk';
-import { getService, postService } from '../utils/services';
+import { postService } from '../utils/services';
 import envConfig from '../config/config';
-import { getToken } from '../utils/token';
 import logger from '../utils/logger';
-import { GameMove } from '../board/interface';
-
-export interface AIConfig {
-    baselUrl?: string;
-    apiKey?: string;
-    timeout?: number;
-}
+import { AIConfig } from './interface'
 
 const AI_API_ENDPOINT = {
     SUGGEST_MOVE: '/api/fabric/v1/ai/suggest-move'
@@ -36,6 +29,8 @@ export class AIHelper {
                 controller?.suggestMove?.abort()
             }
             controller.suggestMove = new AbortController()
+            const payload = { question, model: envConfig.AI_MODEL };
+            logger.debug('AI Suggest Move Payload:', payload);
             const response = await postService(
                 `${this.config.baselUrl}${AI_API_ENDPOINT.SUGGEST_MOVE}`,
                 { question, model: envConfig.AI_MODEL },

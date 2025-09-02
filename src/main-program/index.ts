@@ -22,6 +22,7 @@ const mainProgram = async (_quoptions: GameOptions) => {
         spinner.stop();
         console.log(); // Add a newline for better readability
         logger.info(chalk.blue('Game 2048 Loaded!'));
+        board.collectMoveHistory({ direction: 'start' });
         board.display();
         const rl = createReadlineInterface();
         
@@ -35,26 +36,30 @@ const mainProgram = async (_quoptions: GameOptions) => {
                 switch (command) {
                     case 'up':
                     case 'w':
-                        board.collectMoveHistory({ direction: 'up' });
                         board.mergeUp();
+                        board.collectMoveHistory({ direction: 'up' });
+                        board.display();
                         break;
 
                     case 'down':
                     case 's':
-                        board.collectMoveHistory({ direction: 'down' });
                         board.mergeDown();
+                        board.collectMoveHistory({ direction: 'down' });
+                        board.display();
                         break;
 
                     case 'left':
                     case 'a':
-                        board.collectMoveHistory({ direction: 'left' });
                         board.mergeLeft();
+                        board.collectMoveHistory({ direction: 'left' });
+                        board.display();
                         break;
 
                     case 'right':
                     case 'd':
-                        board.collectMoveHistory({ direction: 'right' });
                         board.mergeRight();
+                        board.collectMoveHistory({ direction: 'right' });
+                        board.display();
                         break;
 
                     case 'ai':

@@ -22,6 +22,13 @@ export function formatCell(cell: number | null, width: number = 4): string {
     return ' '.repeat(leftPad) + str + ' '.repeat(rightPad);
 }
 
+export function formatCell2(cell: number | null): string {
+    if (cell === null) return 'null';
+    
+    const str = cell.toString();
+    return str;
+}
+
 /**
  * Centers a string within a specified width
  * @param {string} text - The text to center

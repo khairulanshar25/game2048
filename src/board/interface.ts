@@ -3,7 +3,7 @@ export type CellValue = number | null;
 export type GameBoard = CellValue[][];
 export type BoardRow = CellValue[];
 export interface GameMove {
-    direction: 'up' | 'down' | 'left' | 'right';
+    direction: 'up' | 'down' | 'left' | 'right' | 'start';
     score?: number;
     gameBoard?: GameBoard;
 }
